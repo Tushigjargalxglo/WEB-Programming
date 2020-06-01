@@ -1,0 +1,105 @@
+body{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: url("https://images.unsplash.com/photo-1456271390536-693558280c8f?dpr=1&auto=format&crop=entropy&fit=crop&w=1500&h=996&q=80&cs=tinysrgb") no-repeat center center fixed;
+  background-color: #fff;
+  font-family: 'Abril Fatface', cursive;
+  /*font-family: "Roboto", sans-serif;*/
+}
+body h1{
+  margin-top: -550px;
+  margin-left: 250px;
+  font-size: 25px;
+  color: black;
+}
+.table{
+  display:flex;
+  margin-top: 50px;
+  margin-left: -300px;
+  flex-direction: column;
+  height: auto;
+  width: 400px;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 0 50px 0 rgba(0,0,0,0.2);
+}
+.header{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  color: white;
+  height: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.img{
+  margin-bottom: 30px;
+  width: auto;
+  height: 310px;
+}
+.season{
+  margin-top: 5px;
+  text-align: center;
+  margin-bottom: -5px;
+}
+.left, .month, .right{
+  cursor: pointer;
+  align-items: center;
+  text-align: center;
+  width: 160px;
+  margin-top: 325px;
+  margin-left: -20px;
+  font-size: 20px;
+  color: black;
+}
+.left:hover{
+  transition: .6s;
+  transform: translateX(-25px);
+}
+.right:hover{
+  transition: .6s;
+  transform: translateX(25px);
+}
+.week div:nth-child(1), .week div:nth-child(7) {
+  color: red;
+}
+.week, .dayRow{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.dayBody{
+  display: flex;
+  flex-direction: column;
+}
+ .week div, .dayRow div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  color: purple;
+  background-color: #fff;
+}
+.dayRow div:nth-child(1):hover, .dayRow div:nth-child(7):hover, .dayRow div:hover{
+  background: #da89a2;
+  color: #fff;
+  transition: .7s;
+  border-radius: 100%;
+}
+.dayRow div:nth-child(1), .dayRow div:nth-child(7){
+  color: red;
+}
+#notDay{
+  color: #a8a7a7;
+}
+#notDay:hover{
+  color: #fff;
+  background-color: black;
+}
+#notDay:first-child, #notDay:last-child{
+  color: #ff9499;
+}
+#notDay:first-child:hover, #notDay:last-child:hover{
+  color: #fff;
+  background-color: black;
+}

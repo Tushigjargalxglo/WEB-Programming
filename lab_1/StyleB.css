@@ -1,0 +1,27 @@
+.flex-container {
+  display: flex;
+  flex-flow: row nowrap;
+  min-height: 100vh;
+  }
+
+.flex-container > div {
+  height: 150px;
+  background-color: #eeeff2;
+  border-left: 10px dotted #D0D0FF;
+  min-width: 100px;
+}
+.flex-container > div:last-child{
+  right: 0;
+  align-self: flex-end;
+  position: absolute;
+  
+}
+.flex-container > div:hover{
+  background: linear-gradient(45deg,#eeeff2, yellow);
+  color: goldenrod;
+  cursor: pointer;
+}
+.flex-container > div > p{
+  margin-left: 10px;
+  margin-top: 10px;
+}

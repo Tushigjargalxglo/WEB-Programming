@@ -1,0 +1,137 @@
+'use strict';
+class DatePicker {
+  constructor(id, callback) {
+    this.id=id;
+    this.callback=callback;
+  }
+  render(date){
+      var calender=document.getElementById(this.id);
+      calender.appendChild(this.createCalender(date));
+  }
+  createCalender(date){
+    //календараа үүсгэнэ
+    var table=document.createElement("div");
+    table.setAttribute("class","table");
+
+
+    //header үүсгэнэ
+    var header=this.createHeader(table,date);
+    header.setAttribute("class","header");
+
+
+    //өдрүүдээ үүсгэнэ
+    var days=[ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
+    var week=document.createElement("div");
+    week.setAttribute("class","week");
+    table.appendChild(week);
+    for(var i=0; i<7; i++){
+      var dayCell=document.createElement("div");
+      week.appendChild(dayCell);
+      dayCell.innerHTML=days[i];
+    }
+
+    //өдрөө оруулна
+    var firstDay=new Date(date.getFullYear(), date.getMonth(), 1);
+    var dayBody=document.createElement("div");
+    table.appendChild(dayBody);
+    dayBody.setAttribute("class","dayBody");
+    var tmpMonth=firstDay.getMonth();
+    while(1){
+      var dayRow=document.createElement("div");
+      dayBody.appendChild(dayRow);
+      dayRow.setAttribute("class","dayRow");
+
+      //хэрвээ сарын эхний өдөр бүтэнсайн биш бол өмнөх сарын сүүлийн өдрүүдийг оруулна.
+      if(firstDay.getDay()!==0){
+          var tmpDay=new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate()-1);
+          //umnuh sariin hamgiin suulin sunday olj baina.
+          while(tmpDay.getDay()!==0){
+            tmpDay.setDate(tmpDay.getDate()-1);
+          }
+
+          //umnuh sariin dutuu udruudiig nuhnu
+         while(tmpDay.getMonth()!==firstDay.getMonth()){
+           var dayCell=document.createElement("div");
+           dayRow.appendChild(dayCell);
+            dayCell.innerHTML=tmpDay.getDate();
+            dayCell.setAttribute("id","notDay");
+            let fixedDate={ day: dayCell.innerHTML, month: tmpDay.getMonth()+1, year: tmpDay.getFullYear() };
+            dayCell.addEventListener("click", ()=>{
+              //this.callback(this.id, fixedDate);
+              console.log("Ene sariin udur bish baina.");
+            });
+            tmpDay.setDate(tmpDay.getDate()+1);
+          }
+
+          //эхний мөрийнхөө үндсэн сарын өдрүүдээр дүүргэнэ
+          tmpDay=firstDay;
+          while(tmpDay.getDay()!==0){
+            var dayCell=document.createElement("div");
+            dayRow.appendChild(dayCell);
+            dayCell.innerHTML=tmpDay.getDate();
+            let fixedDate={ day: dayCell.innerHTML, month: tmpDay.getMonth()+1, year: tmpDay.getFullYear() };
+            dayCell.addEventListener("click", ()=>{
+              this.callback(this.id, fixedDate);
+            });
+            tmpDay.setDate(tmpDay.getDate()+1);
+          }
+      }
+      else{
+        //Календараа дараагийн сарын өдрүүдээр үлдсэн өдрөө дүүргэнэ.
+        if(firstDay.getMonth()!==date.getMonth()){
+          break;
+        }
+        for(var i=0; i<7; i++){
+          var dayCell=document.createElement("div");
+          dayRow.appendChild(dayCell);
+          dayCell.innerHTML=firstDay.getDate();
+          if(tmpMonth!=firstDay.getMonth()){
+            dayCell.setAttribute("class","notDay");
+            dayCell.setAttribute("id","notDay");
+            dayCell.addEventListener("click", ()=>{
+              //this.callback(this.id, fixedDate);
+              console.log("Ene sariin udur bish baina.");
+            });
+          }
+          let fixedDate={ day: dayCell.innerHTML, month: firstDay.getMonth()+1, year: firstDay.getFullYear() };
+          dayCell.addEventListener("click", ()=>{
+            this.callback(this.id, fixedDate);
+
+          });
+          firstDay.setDate(firstDay.getDate()+1);
+        }
+      }
+
+    }
+    return table;
+  }
+  createHeader(table, date){
+    var header=document.createElement("div");
+    table.appendChild(header);
+    var left=document.createElement("div");
+    var month=document.createElement("div");
+    var right=document.createElement("div");
+    left.setAttribute("class","left");
+    month.setAttribute("class","month");
+    right.setAttribute("class","right");
+    header.appendChild(left);
+    header.appendChild(month);
+    header.appendChild(right);
+    left.innerHTML="<";
+    left.addEventListener("click", ()=>{
+      table.remove();
+      date.setMonth(date.getMonth()-1);
+      this.render(date);
+    })
+    var months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    month.innerHTML=months[date.getMonth()]+"   "+date.getFullYear();
+    month.colSpan="5";
+    right.innerHTML=">";
+    right.addEventListener("click", ()=>{
+      table.remove();
+      date.setMonth(date.getMonth()+1);
+      this.render(date);
+    });
+    return header;
+  }
+}

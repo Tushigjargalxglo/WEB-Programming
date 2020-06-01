@@ -1,0 +1,37 @@
+/* CSS styles for a CS142 project. */
+
+body {
+    padding-left: 30%;
+    font-family: Tahoma, Arial, sans-serif; 
+    font-size: 13px;
+    height: 600px;
+    color: #000000; 
+    background: linear-gradient(45deg, #49a09d, #5f2c82); 
+    margin: 8px;
+    
+}
+h1{
+    padding-left: 12%;
+}
+/* Styles for sample tables: */
+
+.example {
+    box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+    display: inline-block;
+    border-collapse: collapse;
+    border-radius: 0.25em;
+}
+
+.example td, th {
+    padding: 2px 10px 2px 10px; 
+    vertical-align: top; 
+    background-color: rgba(255,255,255,0.2);
+	color: #fff;
+    border-bottom: 1px solid #364043;
+    }
+.example td:hover {
+			background-color: rgba(255,255,255,0.5);
+		}
+/* .example tr:nth-child(odd) td {background: #dfe1e7;}
+.example tr:first-child td {border-top: none; background: #687291;
+    color: #ffffff; white-space: nowrap;} */
